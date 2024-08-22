@@ -1,25 +1,36 @@
-pragma solidity ^0.8.19;
-// SPDX-License-Identifier: MIT
 
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.8.0;
+
+// interface para smartcontract
 interface IERC20{
 
     //getters
+	//suprimento total de tokens no contrato
     function totalSupply() external view returns(uint256);
+	//saldo em determinado endereço
     function balanceOf(address account) external view returns (uint256);
+	//disponibiliza limite definido e atual
     function allowance(address owner, address spender) external view returns (uint256);
 
     //functions
+	//usar o valor disponibizado por allowance
     function transfer(address recipient, uint256 amount) external returns (bool);
+	//aprova transação de alguém gastar determinado de determinado saldo
     function approve(address spender, uint256 amount) external returns (bool);
+	//trabalha com endereços de carteira de envio e recebimento de tokens
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 
     //events 
+	//evento disparado no transfer
     event Transfer(address indexed from, address indexed to, uint256 value);
+	//evento disparado na aprovação
     event Approval(address indexed owner, address indexed spender, uint256);
 
 }
 
-contract DIOToken is IERC20{
+contract DIOCoin is IERC20{
 
     string public constant name = "DIO Token";
     string public constant symbol = "DIO";
